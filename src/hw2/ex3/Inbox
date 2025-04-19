@@ -1,4 +1,5 @@
-
+//Stelle sicher dass Zugriff auf die anderen Klassen in dieser Klasse habe
+package hw2.ex3;
 import java.util.ArrayList;
 
 
@@ -23,7 +24,7 @@ public class Inbox {
         return sb.toString();
     }
 
-    public String Inbox::open(int index) {
+    public String open(int index) {
         if (index < 0 || index >= mails.size()) {
             return "Invalid index";
         }
@@ -32,7 +33,7 @@ public class Inbox {
         return mail.format();
     }
 
-    public int Inbox::countUnread() {
+    public int countUnread() {
         int count = 0;
         for (Mail mail : mails) {
             if (!mail.isRead()) {
@@ -43,18 +44,20 @@ public class Inbox {
     }
 
 
-
     public static void main(String[] args) {
 
         Mail m1 = new Mail("Torsten69@googlemail.com", "Bier in Garten", "Wat ist denn mit dem Bier?");
         Mail m2 = new Mail("Paul@dopatka.com", "Hausaufgaben", "Luc, HÖRBITTEAUFMICHUMHILFEZUBITTEN!!! FRAG EINFACH CHATGPT ODER DENK MAL SELBST NACH");
         Mail m3 = new Mail("ex@mpl.es", "examples", "ztubip xampelz");
-        ArrayList<Mail> mailliste = {m1, m2, m3};
-
+        ArrayList<Mail> mailliste = new ArrayList<>();
+        mailliste.add(m1);
+        mailliste.add(m2);
+        mailliste.add(m3);
         Inbox inbox1 = new Inbox(mailliste);
-
-        
-
+    
+        inbox1.formatMails();
+    
     }
 
 }
+
