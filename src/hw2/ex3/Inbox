@@ -1,0 +1,60 @@
+
+import java.util.ArrayList;
+
+
+public class Inbox {
+
+    private ArrayList<Mail> mails = new ArrayList<>();
+
+    public void addMail(Mail mail) {
+        mails.add(mail);
+    }
+
+    public Inbox(ArrayList<Mail> mails) {
+        this.mails = mails;
+
+    }
+
+    public String formatMails() {
+        StringBuilder sb = new StringBuilder();
+        for (Mail mail : mails) {
+            sb.append(mail.formatHeader()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public String Inbox::open(int index) {
+        if (index < 0 || index >= mails.size()) {
+            return "Invalid index";
+        }
+        Mail mail = mails.get(index);
+        mail.setRead(true); 
+        return mail.format();
+    }
+
+    public int Inbox::countUnread() {
+        int count = 0;
+        for (Mail mail : mails) {
+            if (!mail.isRead()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+
+    public static void main(String[] args) {
+
+        Mail m1 = new Mail("Torsten69@googlemail.com", "Bier in Garten", "Wat ist denn mit dem Bier?");
+        Mail m2 = new Mail("Paul@dopatka.com", "Hausaufgaben", "Luc, HÖRBITTEAUFMICHUMHILFEZUBITTEN!!! FRAG EINFACH CHATGPT ODER DENK MAL SELBST NACH");
+        Mail m3 = new Mail("ex@mpl.es", "examples", "ztubip xampelz");
+        ArrayList<Mail> mailliste = {m1, m2, m3};
+
+        Inbox inbox1 = new Inbox(mailliste);
+
+        
+
+    }
+
+}

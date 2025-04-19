@@ -1,0 +1,28 @@
+public class Mail {
+    private String senderAddress;
+    private String subject;
+    private String message;
+    private Timestamp datetime;
+    private Boolean isRead;
+
+    public Mail(String senderAddress, String subject, String message) {
+        this.senderAddress = senderAddress;
+        this.message = message;
+        this.subject = subject;
+        this.datetime = new Timestamp(System.currentTimeMillis());
+        this.isRead = false;
+    }
+
+    public String format() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(subject).append(" from ").append(senderAddress).append(" on ").append(datetime.toString()).append(": ").append(message).append(".");
+        return sb.toString();
+    }
+
+    public String formatHeader() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(isRead).append(" | ").append(subject).append(" | ")..append(senderAddress).append(" | ")append(datetime.toString());
+        return sb.toString();
+    }
+
+}

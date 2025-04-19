@@ -1,0 +1,119 @@
+class User {
+ String name = " Unknown ";
+ public String getRole () {
+    return " General user ";
+ }
+
+ public String getName () {
+    return this.name;
+ }
+}
+
+class Librarian extends User {
+ String department = " Reference ";
+
+ @Override
+ public String getRole () {
+    return this.name + " Librarian ";
+ }
+
+ public void work () {
+ //do some work
+ }
+}
+
+public class LibrarySystem {
+    public static void main( String [] args) {
+        User u1 = new User ();
+        Librarian l1 = new Librarian ();
+        User u2 = l1;
+
+        System .out. println (u1. getRole ());
+        System .out. println (l1. getRole ());
+        System .out. println (u2. getRole ());
+
+        l1. getName ();
+        u1. getName ();
+
+        l1.work ();
+        u2.work ();
+ }
+}
+
+/*
+====================== Hausaufgabe 1. Teil ======================
+
+Konsolenausgabe:
+-------------------------------------------------------------
+ General user 
+ Unknown  Librarian 
+ Unknown  Librarian 
+
+Erklärung:
+-------------------------------------------------------------
+- u1 ist ein Objekt vom Typ User → getRole() ruft User.getRole() auf.
+- l1 ist ein Librarian → getRole() ist überschrieben in Librarian.
+- u2 ist vom Typ User, referenziert aber ein Librarian-Objekt → Polymorphismus greift → Librarian.getRole() wird aufgerufen.
+
+Fehler:
+-------------------------------------------------------------
+u2.work();  // Compilerfehler!
+→ Der statische Typ von u2 ist User, und die Methode work() ist nicht in User definiert.
+→ Obwohl das Objekt ein Librarian ist, kann der Compiler das nicht wissen → Fehler: "Cannot find symbol: method work()"
+
+Stack-Speicher:
+-------------------------------------------------------------
+u1 → User@0x1
+l1 → Librarian@0x2
+u2 → Librarian@0x2 (gleiche Referenz wie l1)
+
+Heap-Speicher:
+-------------------------------------------------------------
+User@0x1:
+  [0] name = " Unknown "
+  vTable:
+    [0] getRole()  → User
+    [1] getName()  → User
+
+Librarian@0x2:
+  [0] name = " Unknown "   (geerbt von User)
+  [1] department = " Reference "
+  vTable:
+    [0] getRole()  → Librarian (überschrieben)
+    [1] getName()  → User (geerbt)
+    [2] work()     → Librarian
+
+=============================================================
+*/
+
+/*
+=================== HW 2. Teil (METHODENÜBERSETZUNG) ===================
+
+Zeile 30: u1.getRole();
+→ Typ: User → User.vTable[0].invoke(u1) // getRole() in User
+
+Zeile 31: l1.getRole();
+→ Typ: Librarian → Librarian.vTable[0].invoke(l1) // getRole() überschrieben
+
+Zeile 32: u2.getRole();
+→ Typ: User (zeigt auf Librarian) → Librarian.vTable[0].invoke(u2)
+
+Zeile 34: l1.getName();
+→ Typ: Librarian (geerbt von User) → Librarian.vTable[1].invoke(l1)
+
+Zeile 35: u1.getName();
+→ Typ: User → User.vTable[1].invoke(u1)
+
+Zeile 37: l1.work();
+→ Typ: Librarian → Librarian.vTable[2].invoke(l1)
+
+Zeile 38: u2.work();
+→ Typ: User → Compilerfehler!
+   work() ist nicht in User definiert → "Cannot find symbol: method work()"
+   → Keine vTable-Zuweisung möglich, Aufruf nicht erlaubt.
+
+============================================================================
+*/
+
+
+ 
