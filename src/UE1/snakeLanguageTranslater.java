@@ -1,4 +1,4 @@
-package src.UE1;
+package UE1;
 import java.util.Scanner;
 
 public class snakeLanguageTranslater{

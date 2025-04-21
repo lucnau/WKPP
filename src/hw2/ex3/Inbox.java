@@ -29,14 +29,14 @@ public class Inbox {
             return "Invalid index";
         }
         Mail mail = mails.get(index);
-        mail.setRead(true); 
+        mail.setIsRead(true); 
         return mail.format();
     }
 
     public int countUnread() {
         int count = 0;
         for (Mail mail : mails) {
-            if (!mail.isRead()) {
+            if (!mail.getIsRead()) {
                 count++;
             }
         }
@@ -55,8 +55,10 @@ public class Inbox {
         mailliste.add(m3);
         Inbox inbox1 = new Inbox(mailliste);
     
-        inbox1.formatMails();
+        System.out.println(inbox1.formatMails());
     
+        //to do: evtl kleines Testprogramm schreiben, dass die Methoden testet und mit while auch erstmal interaktiv istlol
+
     }
 
 }
